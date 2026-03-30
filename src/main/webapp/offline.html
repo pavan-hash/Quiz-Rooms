@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Offline | Vaadin CRM</title>
+    <style>
+        body
+        {
+display: flex;
+flex-direction: center;
+font-family: sans-serif;
+color: #555;
+}
+
+.content{
+width: 100%;
+}
+
+.offline-image
+{
+max-width: 100%;
+max-height: 40%;
+
+}
+
+    </style>
+</head>
+<body>
+<div class="content">
+    <img src="images/offline.jpg" alt="Quiz-rooms is offline" class="offline-image"/>
+    <h1>You're Offline</h1>
+    <p> Internet connection is broken ;(. Get back  online to continue using vaadin CRM</p>
+</div>>
+<script>
+    window.addEventListener("online", () => {
+  window.location.reload();
+});
+
+setInterval(() => {
+  fetch("/", { method: "HEAD", cache: "no-store" })
+    .then(() => window.location.reload())
+    .catch(() => {});
+}, 2000);
+      </script>
+</body>
+</html>

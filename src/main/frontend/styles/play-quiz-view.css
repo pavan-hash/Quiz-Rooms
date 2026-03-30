@@ -1,0 +1,349 @@
+/* ─────────────────────────────────────────────
+   MAIN VIEW
+───────────────────────────────────────────── */
+.playquiz-view {
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f17);
+    color: #e8e8f0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+   MAIN CONTAINER
+───────────────────────────────────────────── */
+.playquiz-view > vaadin-vertical-layout {
+    max-width: 800px;
+    width: 100%;
+
+    background: #111118;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    border: 1px solid #2a2a3a;
+    gap: 16px;
+}
+
+/* ─────────────────────────────────────────────
+   QUESTION CONTAINER
+───────────────────────────────────────────── */
+.question-container,
+.playquiz-view > vaadin-vertical-layout > vaadin-vertical-layout:first-child {
+    background: #0f0f17;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #2a2a3a;
+}
+
+/* FIX: question text explicit color so it's never invisible */
+.question-container span,
+.playquiz-view > vaadin-vertical-layout > vaadin-vertical-layout:first-child span {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #e8e8f0;
+}
+
+/* ─────────────────────────────────────────────
+   OPTIONS (RADIO / MULTI)
+───────────────────────────────────────────── */
+vaadin-radio-group,
+vaadin-multi-select-combo-box {
+    width: 100%;
+}
+
+/* FIX: radio group label */
+vaadin-radio-group::part(label) {
+    color: #a0a0c8;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+/* FIX: radio button labels visible */
+vaadin-radio-button::part(label) {
+    color: #e8e8f0;
+    font-size: 15px;
+}
+
+vaadin-radio-button::part(radio) {
+    border: 2px solid #7c6aff;
+    background: #1a1a24;
+}
+
+vaadin-radio-button[checked]::part(radio) {
+    background: #7c6aff;
+    border-color: #7c6aff;
+}
+
+/* FIX: multi-select combo-box */
+vaadin-multi-select-combo-box::part(input-field) {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 10px;
+    color: #e8e8f0;
+}
+
+vaadin-multi-select-combo-box::part(label) {
+    color: #a0a0c8;
+}
+
+/* ─────────────────────────────────────────────
+   TIMER
+───────────────────────────────────────────── */
+.timer-label,
+.playquiz-view .timer {
+    display: block;
+    background: rgba(255,106,106,0.1);
+    border: 1px solid rgba(255,106,106,0.25);
+    color: #ff6a6a;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* ─────────────────────────────────────────────
+   STATS ROW (Attempted / Not Attempted / Total)
+───────────────────────────────────────────── */
+.stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.stat-attempted {
+    background: rgba(0,201,167,0.12);
+    border: 1px solid rgba(0,201,167,0.25);
+    color: #00e0b8;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stat-not-attempted {
+    background: rgba(255,193,7,0.12);
+    border: 1px solid rgba(255,193,7,0.25);
+    color: #ffc107;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stat-total {
+    background: rgba(124,106,255,0.12);
+    border: 1px solid rgba(124,106,255,0.25);
+    color: #7c6aff;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   NAVIGATION BUTTONS
+───────────────────────────────────────────── */
+.playquiz-view vaadin-horizontal-layout {
+    display: flex !important;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.playquiz-view vaadin-button {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 0 18px;
+    height: 42px;
+    transition: 0.2s ease;
+}
+
+/* FIX: all button labels visible */
+.playquiz-view vaadin-button::part(label) {
+    font-weight: 600;
+}
+
+/* Previous */
+.playquiz-view vaadin-button.btn-prev,
+.playquiz-view vaadin-button:nth-child(1) {
+    background: #2a2a3a !important;
+    color: #c8c8d8 !important;
+    border: 1px solid #3a3a4a;
+}
+
+.playquiz-view vaadin-button.btn-prev::part(label),
+.playquiz-view vaadin-button:nth-child(1)::part(label) { color: #c8c8d8; }
+
+/* Next */
+.playquiz-view vaadin-button.btn-next,
+.playquiz-view vaadin-button:nth-child(2) {
+    background: linear-gradient(135deg, #6a5cff, #7c6aff) !important;
+    color: #fff !important;
+}
+
+.playquiz-view vaadin-button.btn-next::part(label),
+.playquiz-view vaadin-button:nth-child(2)::part(label) { color: #fff; }
+
+/* Submit */
+.playquiz-view vaadin-button.btn-submit,
+.playquiz-view vaadin-button:nth-child(3) {
+    background: linear-gradient(135deg, #00c9a7, #00e0b8) !important;
+    color: #0a0a0f !important;
+}
+
+.playquiz-view vaadin-button.btn-submit::part(label),
+.playquiz-view vaadin-button:nth-child(3)::part(label) { color: #0a0a0f; font-weight: 700; }
+
+/* Clear Answer */
+.playquiz-view vaadin-button.btn-clear,
+.playquiz-view vaadin-button:nth-child(4) {
+    background: rgba(255,106,106,0.1) !important;
+    border: 1px solid rgba(255,106,106,0.3) !important;
+    color: #ff6a6a !important;
+}
+
+.playquiz-view vaadin-button.btn-clear::part(label),
+.playquiz-view vaadin-button:nth-child(4)::part(label) { color: #ff6a6a; }
+
+.playquiz-view vaadin-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124,106,255,0.35);
+}
+
+/* ─────────────────────────────────────────────
+   SCORE DIALOG — FIX: text always visible
+───────────────────────────────────────────── */
+vaadin-dialog-overlay::part(overlay) {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+vaadin-dialog-overlay::part(content) {
+    background: #111118;
+    color: #e8e8f0;
+    border-radius: 20px;
+    border: 1px solid #2a2a3a;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    padding: 32px 28px;
+    text-align: center;
+}
+
+/* FIX: dialog text color */
+vaadin-dialog-overlay span,
+vaadin-dialog-overlay h2,
+vaadin-dialog-overlay h3,
+vaadin-dialog-overlay p {
+    color: #e8e8f0;
+}
+
+/* Dialog button */
+vaadin-dialog-overlay vaadin-button {
+    background: linear-gradient(135deg, #6a5cff, #7c6aff) !important;
+    color: #fff !important;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+vaadin-dialog-overlay vaadin-button::part(label) {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .playquiz-view vaadin-horizontal-layout {
+        justify-content: center;
+    }
+
+    .playquiz-view vaadin-button {
+        flex: 1;
+        min-width: 80px;
+    }
+}
+
+/* Make options visible */
+vaadin-radio-button,
+vaadin-checkbox {
+    color: #e2e8f0 !important;
+}
+
+/* Labels */
+vaadin-radio-button::part(label),
+vaadin-checkbox::part(label) {
+    color: #e2e8f0;
+    font-size: 16px;
+}
+
+/* Checkbox + radio icons */
+vaadin-checkbox::part(checkbox),
+vaadin-radio-button::part(radio) {
+    background-color: #1e293b;
+    border: 1px solid #64748b;
+}
+
+/* Selected state */
+vaadin-checkbox[checked]::part(checkbox),
+vaadin-radio-button[checked]::part(radio) {
+    background-color: #6366f1;
+    border-color: #6366f1;
+}
+.timer {
+    font-weight: bold;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+.playquiz-view {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.question-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.quiz-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+vaadin-button {
+    border-radius: 10px;
+    font-weight: 500;
+}
+.question-container span {
+    color: #f8fafc;
+    font-size: 18px;
+    font-weight: 500;
+}
+.playquiz-view {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2), transparent 40%),
+                linear-gradient(135deg, #020617, #0f172a, #020617);
+
+    position: relative;
+    overflow: hidden;
+}

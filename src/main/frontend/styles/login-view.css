@@ -1,0 +1,156 @@
+/* ─────────────────────────────────────────────
+   MAIN VIEW
+───────────────────────────────────────────── */
+.login-view {
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f17);
+    height: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ─────────────────────────────────────────────
+   LOGIN CARD
+───────────────────────────────────────────── */
+.login-card {
+    background: rgba(17, 17, 24, 0.95);
+    backdrop-filter: blur(12px);
+
+    padding: 40px 36px;
+    border-radius: 20px;
+
+    border: 1px solid #2a2a3a;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ─────────────────────────────────────────────
+   HEADINGS
+───────────────────────────────────────────── */
+.login-view h1 {
+    margin: 0 0 4px 0;
+    text-align: center;
+    /* FIX: explicit color so text is never invisible */
+    color: #e8e8f0;
+}
+
+.login-view h1:first-of-type {
+    font-size: 28px;
+    font-weight: 800;
+    /* gradient title */
+    background: linear-gradient(135deg, #7c6aff, #a99cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.login-view h1:nth-of-type(2) {
+    font-size: 15px;
+    font-weight: 400;
+    color: #7070a0;
+    /* FIX: reset gradient so subtitle is visible as plain text */
+    background: none;
+    -webkit-text-fill-color: #7070a0;
+    margin-bottom: 12px;
+}
+
+/* ─────────────────────────────────────────────
+   LOGIN FORM
+───────────────────────────────────────────── */
+.loginform {
+    width: 320px;
+}
+
+/* Form wrapper */
+.loginform::part(form) {
+    background: transparent;
+}
+
+/* FIX: Input field backgrounds so text is visible on dark card */
+.loginform vaadin-text-field::part(input-field),
+.loginform vaadin-password-field::part(input-field) {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 10px;
+    color: #e8e8f0;
+}
+
+/* FIX: Labels were invisible — now explicit bright color */
+.loginform vaadin-text-field::part(label),
+.loginform vaadin-password-field::part(label) {
+    color: #a0a0c8;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* FIX: Value text color inside inputs */
+.loginform vaadin-text-field input,
+.loginform vaadin-password-field input {
+    color: #e8e8f0;
+    caret-color: #7c6aff;
+}
+
+/* Placeholder text */
+.loginform vaadin-text-field::part(input-field)::placeholder,
+.loginform vaadin-password-field::part(input-field)::placeholder {
+    color: #4a4a6a;
+}
+
+/* Focus ring */
+.loginform vaadin-text-field:focus-within::part(input-field),
+.loginform vaadin-password-field:focus-within::part(input-field) {
+    border-color: #7c6aff;
+    box-shadow: 0 0 0 3px rgba(124,106,255,0.2);
+}
+
+/* Login button */
+.loginform vaadin-button {
+    background: linear-gradient(135deg, #6a5cff, #7c6aff) !important;
+    color: #fff !important;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.loginform vaadin-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124,106,255,0.45);
+}
+
+/* Error message */
+.loginform::part(error-message) {
+    color: #ff6a6a;
+    font-size: 13px;
+}
+
+/* ─────────────────────────────────────────────
+   REGISTER LINK
+───────────────────────────────────────────── */
+.register-link {
+    margin-top: 12px;
+    color: #7c6aff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    color: #a99cff;
+}
+.login-view {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2), transparent 40%),
+                linear-gradient(135deg, #020617, #0f172a, #020617);
+
+    position: relative;
+    overflow: hidden;
+}

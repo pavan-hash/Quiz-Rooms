@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Page Wrapper ───────────────────────────────────────────── */
+
+.home-view {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1a1a2e 0%, #0a0a0f 70%);
+    font-family: 'Inter', sans-serif;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* ── Page Title / Greeting ──────────────────────────────────── */
+
+.home-view .home-title,
+.home-view h1,
+.home-view h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: #e8e8f0;
+    margin: 0 0 24px 0;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
+/* ── Button Row ─────────────────────────────────────────────── */
+
+.home-buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+}
+
+/* ── Card Buttons — base styles ─────────────────────────────── */
+/*
+   Vaadin Flow Button renders as:
+     <vaadin-button>
+       #shadow-root
+         <button part="button"> ← actual clickable surface
+           <span part="label">
+   We use --lumo variables + direct host sizing + the [style] trick
+   so the gradient shows on the rendered <button> element inside shadow.
+   The most reliable cross-version approach: set background via
+   --vaadin-button-background custom property AND ::part(button).
+*/
+
+.home-btn {
+    width: 240px !important;
+    height: 130px !important;
+    border-radius: 20px !important;
+    border: none !important;
+    cursor: pointer !important;
+    position: relative;
+
+    /* Remove Lumo defaults that fight our styles */
+    --lumo-button-size: 130px;
+    --vaadin-button-height: 130px;
+
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.25s ease !important;
+
+    animation: cardEntrance 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+/* The actual rendered button surface lives in ::part(button) in Vaadin 24/25 */
+.home-btn::part(button) {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.home-btn::part(label) {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    white-space: normal;
+    padding: 0 12px;
+    pointer-events: none;
+}
+
+/* ── Button 1 — Create Manually (blue) ─────────────────────── */
+
+.home-btn-manual {
+    background: linear-gradient(135deg, #4facfe 0%, #00c6ff 100%) !important;
+    box-shadow: 0 8px 28px rgba(79,172,254,0.40) !important;
+    animation-delay: 0s;
+}
+
+.home-btn-manual::part(button) {
+    background: linear-gradient(135deg, #4facfe 0%, #00c6ff 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.home-btn-manual::part(label) {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.home-btn-manual:hover {
+    transform: translateY(-8px) scale(1.04) !important;
+    box-shadow: 0 20px 48px rgba(79,172,254,0.55) !important;
+}
+
+.home-btn-manual:hover::part(button) {
+    filter: brightness(1.08);
+}
+
+/* ── Button 2 — Create with AI (purple) ────────────────────── */
+
+.home-btn-ai {
+    background: linear-gradient(135deg, #7c6aff 0%, #9b6aff 100%) !important;
+    box-shadow: 0 8px 28px rgba(124,106,255,0.45) !important;
+    animation-delay: 0.1s;
+}
+
+.home-btn-ai::part(button) {
+    background: linear-gradient(135deg, #7c6aff 0%, #9b6aff 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.home-btn-ai::part(label) {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.home-btn-ai:hover {
+    transform: translateY(-8px) scale(1.04) !important;
+    box-shadow: 0 20px 48px rgba(124,106,255,0.60) !important;
+}
+
+.home-btn-ai:hover::part(button) {
+    filter: brightness(1.08);
+}
+
+/* ── Button 3 — Play Quiz (teal) ────────────────────────────── */
+
+.home-btn-play {
+    background: linear-gradient(135deg, #00c9a7 0%, #00e5b0 100%) !important;
+    box-shadow: 0 8px 28px rgba(0,201,167,0.40) !important;
+    animation-delay: 0.2s;
+}
+
+.home-btn-play::part(button) {
+    background: linear-gradient(135deg, #00c9a7 0%, #00e5b0 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.home-btn-play::part(label) {
+    /* dark label for contrast on bright teal */
+    color: #052e22;
+    text-shadow: none;
+}
+
+.home-btn-play:hover {
+    transform: translateY(-8px) scale(1.04) !important;
+    box-shadow: 0 20px 48px rgba(0,201,167,0.55) !important;
+}
+
+.home-btn-play:hover::part(button) {
+    filter: brightness(1.06);
+}
+
+/* ── Active press ───────────────────────────────────────────── */
+
+.home-btn:active {
+    transform: scale(0.96) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35) !important;
+}
+
+/* ── Entry animation ────────────────────────────────────────── */
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .home-buttons-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .home-btn {
+        width: 88vw !important;
+        max-width: 340px !important;
+        height: 110px !important;
+    }
+}
+.home-view {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2), transparent 40%),
+                linear-gradient(135deg, #020617, #0f172a, #020617);
+
+    position: relative;
+    overflow: hidden;
+}

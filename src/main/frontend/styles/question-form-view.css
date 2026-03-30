@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════════════════════════════
+   QUESTION FORM VIEW — VAADIN-COMPATIBLE DARK THEME
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+html, :host {
+    --lumo-base-color:             #0b0b18;
+    --lumo-tint-5pct:              rgba(255,255,255,0.03);
+    --lumo-tint-10pct:             rgba(255,255,255,0.06);
+    --lumo-body-text-color:        #e8e8f8;
+    --lumo-header-text-color:      #f0f0ff;
+    --lumo-primary-color:          #7c6aff;
+    --lumo-primary-color-10pct:    rgba(124,106,255,0.10);
+    --lumo-primary-contrast-color: #fff;
+    --lumo-error-color:            #ff5a5a;
+    --lumo-success-color:          #00d9b5;
+    --lumo-border-radius-m:        12px;
+    --lumo-font-family:            'DM Sans', sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MAIN FORM PANEL — single-column flex, NOT grid
+   Using flex-column so buttons at the bottom are always reachable
+───────────────────────────────────────────────────────────── */
+.questionForm-view {
+    font-family: 'DM Sans', sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+
+    background:
+        radial-gradient(ellipse 70% 50% at 15% 10%, rgba(124,106,255,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(0,217,181,0.14) 0%, transparent 50%),
+        linear-gradient(155deg, #04040d 0%, #07071a 50%, #04040d 100%);
+
+    color: #f0f0ff;
+    min-height: 100vh;
+    padding: 28px 20px 40px;
+
+    /* FLEX column — reliable, no grid column span issues */
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    --lumo-base-color:      #0b0b18;
+    --lumo-body-text-color: #e8e8f8;
+    --lumo-primary-color:   #7c6aff;
+}
+
+/* Grid texture */
+.questionForm-view::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(124,106,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,106,255,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   INPUT FIELDS
+───────────────────────────────────────────────────────────── */
+.questionForm-view vaadin-text-field,
+.questionForm-view vaadin-text-area,
+.questionForm-view vaadin-combo-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.questionForm-view vaadin-text-field::part(input-field),
+.questionForm-view vaadin-text-area::part(input-field),
+.questionForm-view vaadin-combo-box::part(input-field) {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.09) !important;
+    border-radius: 12px;
+    color: #e8e8f8 !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.questionForm-view vaadin-text-field:focus-within::part(input-field),
+.questionForm-view vaadin-text-area:focus-within::part(input-field),
+.questionForm-view vaadin-combo-box:focus-within::part(input-field) {
+    background: rgba(124,106,255,0.06) !important;
+    border-color: #7c6aff !important;
+    box-shadow: 0 0 0 3px rgba(124,106,255,0.18) !important;
+}
+
+.questionForm-view vaadin-text-field::part(label),
+.questionForm-view vaadin-text-area::part(label),
+.questionForm-view vaadin-combo-box::part(label) {
+    font-family: 'Syne', sans-serif;
+    color: #8888bb !important;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.questionForm-view vaadin-combo-box-item {
+    background: #10101f;
+    color: #e8e8f8;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+}
+.questionForm-view vaadin-combo-box-item:hover {
+    background: rgba(124,106,255,0.15);
+    color: #fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTON CONTAINER (vaadin-horizontal-layout)
+
+   THE REAL FIX:
+   vaadin-horizontal-layout renders children in its own shadow slot.
+   We cannot change flex-direction from outside.
+
+   Solution: give the HOST element a fixed width+height of auto,
+   then target EACH vaadin-button directly with display:block + width:100%
+   so they each take a full row naturally within the parent flex column.
+───────────────────────────────────────────────────────────── */
+.questionForm-view vaadin-horizontal-layout {
+    width: 100% !important;
+    /* Let it be whatever height it needs */
+    height: auto !important;
+    min-height: unset !important;
+    padding-top: 6px;
+    margin-top: 4px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    /* Override internal flex via custom property Vaadin exposes */
+    --vaadin-button-width: 100%;
+}
+
+/* TARGET THE INTERNAL LAYOUT SLOT */
+.questionForm-view vaadin-horizontal-layout::part(layout) {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTONS — display:block forces each onto its own line
+   regardless of what vaadin-horizontal-layout does internally
+───────────────────────────────────────────────────────────── */
+.questionForm-view vaadin-button {
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.05em;
+    border-radius: 10px;
+    height: 44px;
+    /* BLOCK + 100% width = always its own row */
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: visible;
+    position: relative;
+    z-index: 20;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    margin-bottom: 0;
+}
+
+/* Also target ::part(button) which is the clickable area */
+.questionForm-view vaadin-button::part(button) {
+    width: 100% !important;
+    justify-content: center;
+}
+
+/* Save */
+.questionForm-view vaadin-button[theme~="primary"] {
+    background: linear-gradient(135deg, #00b89a, #00d9b5) !important;
+    color: #050512 !important;
+    box-shadow: 0 4px 20px rgba(0,217,181,0.4) !important;
+}
+.questionForm-view vaadin-button[theme~="primary"]::part(label) { color: #050512; font-weight: 800; }
+.questionForm-view vaadin-button[theme~="primary"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,217,181,0.5) !important;
+}
+
+/* Delete */
+.questionForm-view vaadin-button[theme~="error"] {
+    background: rgba(255,90,90,0.10) !important;
+    border: 1px solid rgba(255,90,90,0.4) !important;
+    color: #ff5a5a !important;
+}
+.questionForm-view vaadin-button[theme~="error"]::part(label) { color: #ff5a5a; }
+.questionForm-view vaadin-button[theme~="error"]:hover {
+    background: rgba(255,90,90,0.2) !important;
+    transform: translateY(-1px);
+}
+
+/* Cancel / tertiary */
+.questionForm-view vaadin-button[theme~="tertiary"],
+.questionForm-view vaadin-button:not([theme~="primary"]):not([theme~="error"]) {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: #8888bb !important;
+}
+.questionForm-view vaadin-button[theme~="tertiary"]::part(label),
+.questionForm-view vaadin-button:not([theme~="primary"]):not([theme~="error"])::part(label) { color: #8888bb; }
+.questionForm-view vaadin-button[theme~="tertiary"]:hover,
+.questionForm-view vaadin-button:not([theme~="primary"]):not([theme~="error"]):hover {
+    background: rgba(255,255,255,0.1) !important;
+    transform: translateY(-1px);
+}
+
+.questionForm-view vaadin-button:active { transform: scale(0.97) !important; }
+
+/* ─────────────────────────────────────────────────────────────
+   EDITING STATE
+───────────────────────────────────────────────────────────── */
+.questionForm-view.editing {
+    box-shadow: inset 0 3px 0 #7c6aff, 0 -4px 24px rgba(124,106,255,0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────────────────────── */
+.questionForm-view::-webkit-scrollbar { width: 5px; }
+.questionForm-view::-webkit-scrollbar-track { background: transparent; }
+.questionForm-view::-webkit-scrollbar-thumb { background: rgba(124,106,255,0.3); border-radius: 3px; }
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .questionForm-view { padding: 20px 14px 36px; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ENTRANCE ANIMATION
+───────────────────────────────────────────────────────────── */
+.questionForm-view {
+    animation: formReveal 0.45s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes formReveal {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+}
