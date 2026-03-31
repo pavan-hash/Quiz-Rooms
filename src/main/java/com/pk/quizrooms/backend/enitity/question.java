@@ -16,7 +16,7 @@ public class question {
     }
    public enum questionategory
    {
-      SingleAnswer,MultipleAnswers;
+      SingleAnswer,MultipleAnswers, SingleAndMultipleAnswers;
    }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

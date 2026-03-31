@@ -65,18 +65,6 @@ public class quizService implements AiQuizGeneratorView.OnSaveListener {
         return questionwrapper;
     }
 
-    public Integer getResult(int qid, List<userResponse> ur) {
-        int result =0,i=0;
-        Optional<quiz> quiz = qr.findById(qid);
-        List<question> questions = quiz.get().getQuestions();
-        for(question question : questions)
-        {
-            if(question.getRight_answer().equalsIgnoreCase(ur.get(i).getResponse()))
-                result++;
-            i++;
-        }
-        return result;
-    }
 
     public quiz getQuiz(String quid) {
         return qr.findByquizhashid(quid).orElse(null);
@@ -93,16 +81,19 @@ public class quizService implements AiQuizGeneratorView.OnSaveListener {
         System.out.println(questions);
         for(question question : questions)
         {
-            if(question.getQuestioncategory().toString().equalsIgnoreCase("singleanswer")) {
-                if (question.getRight_answer().equals(answers.get(question.getId())))
-                    score += marksforrigthanswer;
-                else
-                    score -= negativemarks;
-            }
-            else {
+            if(question.getQuestioncategory().toString().equalsIgnoreCase("singleandmultipleanswers")
+            || question.getQuestioncategory().toString().equalsIgnoreCase("multipleanswers")
+            ) {
                 String rightansweres=String.join( question.getRight_answer());
                 String useranswers=String.join(answers.get(question.getId()));
                 if(rightansweres.equals(useranswers))
+                    score += marksforrigthanswer;
+                else
+                    score -= negativemarks;
+
+            }
+            else {
+                if (question.getRight_answer().equals(answers.get(question.getId())))
                     score += marksforrigthanswer;
                 else
                     score -= negativemarks;

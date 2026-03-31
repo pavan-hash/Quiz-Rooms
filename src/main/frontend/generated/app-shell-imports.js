@@ -1,5 +1,5 @@
 import { injectGlobalCss } from 'Frontend/generated/jar-resources/theme-util.js';
 
-import $cssFromFile_87 from 'Frontend/styles/home-view.css?inline';
+import $cssFromFile_0 from 'Frontend/styles/home-view.css?inline';
 
-injectGlobalCss($cssFromFile_87.toString(), 'CSSImport end', document);
+injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);

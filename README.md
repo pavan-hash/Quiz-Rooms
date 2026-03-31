@@ -26,7 +26,7 @@ The platform focuses on **interactive quiz experiences**, **secure user manageme
 * Add custom questions with:
 
     * Multiple options
-    * Single / Multiple correct answers
+    * Single / Multiple correct answers or both
     * Difficulty levels (EASY, MEDIUM, HARD)
 * Minimum **5 questions required**
 * Configure:
@@ -174,15 +174,15 @@ The platform focuses on **interactive quiz experiences**, **secure user manageme
 ### 2️⃣ Update `application.properties`
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/quiz_rooms
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+spring.datasource.url=jdbc:postgresql://localhost:5432/YOUR_DB_NAME
+spring.datasource.username=YOUR_DB_USERNAME
+spring.datasource.password=YOUR_DB_PASSWORD
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 # Spring AI - openai config for open router
-spring.ai.openai.api-key=YOUR_OPENAI_API_KEY from open router
-spring.ai.openai.base-url=https://openrouter.ai/api
+spring.ai.openai.api-key=YOUR_OPENAI_API_KEY FROM OPEN ROUTER
+spring.ai.openai.base-url=YOUR_OPEN_ROUTER_URL
 spring.ai.openai.chat.options.model=CHAT_MODEL
 ```
 
@@ -193,7 +193,7 @@ spring.ai.openai.chat.options.model=CHAT_MODEL
 ```bash
 git clone <your-repo-url>
 cd quiz-rooms
-./mvnw spring-boot:run
+mvw spring-boot:run
 ```
 
 ---

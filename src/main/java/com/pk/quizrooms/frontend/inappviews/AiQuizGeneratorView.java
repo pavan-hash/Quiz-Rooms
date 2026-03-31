@@ -45,8 +45,8 @@ public class AiQuizGeneratorView extends VerticalLayout {
     // ── Dependencies ───────────────────────────────────────────────────────────
 
     // ── Form fields ────────────────────────────────────────────────────────────
-    private  TextField               topicField      = new TextField("Topic");
-    private  TextField               categoryField   = new TextField("Category");
+    private  TextField   topicField      = new TextField("Topic");
+    private  TextField   categoryField   = new TextField("Category");
     private  Select<question.difficulty>         diffSelect  = new Select<>();
     private  Select<question.questionategory>    typeSelect  = new Select<>();
     private  IntegerField   countField      = new IntegerField("Number of Questions");
@@ -168,6 +168,7 @@ public class AiQuizGeneratorView extends VerticalLayout {
         typeSelect.setItemLabelGenerator(t -> switch (t) {
             case SingleAnswer   -> "Single Answer";
             case MultipleAnswers -> "Multiple Answers";
+            case SingleAndMultipleAnswers -> "Single and Multiple Answers";
         });
         typeSelect.setWidthFull();
         applyFieldTheme(typeSelect);
@@ -345,8 +346,9 @@ public class AiQuizGeneratorView extends VerticalLayout {
                 chip("Topic",      params.topic()),
                 chip("Category",   params.category()),
                 chip("Difficulty", params.difficulty().name()),
-                chip("Type",       params.questionCategory() == question.questionategory.SingleAnswer
-                        ? "Single Answer" : "Multiple Answers")
+                chip("Type",       params.questionCategory() == question.questionategory.SingleAndMultipleAnswers
+                        ? "Single and Multiple Answer" :
+                        "Multiple Answers")
         );
         stats.setSpacing(true);
         stats.setPadding(false);
