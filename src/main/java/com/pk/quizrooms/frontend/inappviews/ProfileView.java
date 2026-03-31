@@ -127,6 +127,8 @@ public class ProfileView extends VerticalLayout {
 
     private void showCreatedQuizzes() {
         Dialog dialog = new Dialog();
+        Dialog playedby = new Dialog("PlayedBY");
+        Button playedbyclose = new Button("Close",e->playedby.close());
         dialog.setSizeFull();
 
         Grid<quiz> grid = new Grid<>(quiz.class, false);
@@ -140,6 +142,21 @@ public class ProfileView extends VerticalLayout {
         Button close = new Button("Close", e -> dialog.close());
         dialog.add(grid, close);
         dialog.open();
+
+
+        grid.addItemDoubleClickListener(e->{
+            quiz quiz = e.getItem();
+            playedby.open();
+            playedby.setSizeFull();
+            Grid<QuizPlayedBy> playedbygrid = new Grid<>(QuizPlayedBy.class, false);
+            playedby.add(playedbygrid,playedbyclose);
+            playedbygrid.addColumn(quizPlayedBy -> quizPlayedBy.getPlayedBy().getUserName()).setHeader("UserName");
+            playedbygrid.addColumn(quizPlayedBy -> quizPlayedBy.getPlayedBy().getFirstName() + quizPlayedBy.getPlayedBy().getLastName()).setHeader("Full Name");
+            playedbygrid.addColumn(quizPlayedBy -> quizPlayedBy.getQuiz().getTotalmarks()).setHeader("Total Marks");
+            playedbygrid.addColumn(QuizPlayedBy::getScore).setHeader("Score Obtained");
+            playedbygrid.setItems(quizPlayedByservice.getAllPlayerswhoplayedccurrentquiz(quiz));
+        });
+
     }
 
     private void showPlayedQuizzes() {
