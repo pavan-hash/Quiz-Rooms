@@ -1,0 +1,440 @@
+/* ═══════════════════════════════════════════════════════════════
+   CREATE QUIZ MANUALLY VIEW
+   VAADIN-COMPATIBLE: overrides Lumo tokens + shadow parts
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 1 — Override Lumo design tokens at html/:host level
+   These PROPAGATE into Vaadin shadow DOM components
+───────────────────────────────────────────────────────────── */
+html,
+:host {
+    --lumo-base-color:             #0b0b18;
+    --lumo-tint-5pct:              rgba(255,255,255,0.03);
+    --lumo-tint-10pct:             rgba(255,255,255,0.06);
+    --lumo-tint-20pct:             rgba(255,255,255,0.10);
+    --lumo-tint-50pct:             rgba(255,255,255,0.24);
+    --lumo-tint-80pct:             rgba(255,255,255,0.56);
+    --lumo-tint-90pct:             rgba(255,255,255,0.72);
+    --lumo-tint:                   #fff;
+
+    --lumo-shade-5pct:             rgba(0,0,0,0.18);
+    --lumo-shade-10pct:            rgba(0,0,0,0.28);
+    --lumo-shade-20pct:            rgba(0,0,0,0.38);
+    --lumo-shade-50pct:            rgba(0,0,0,0.6);
+    --lumo-shade-80pct:            rgba(0,0,0,0.8);
+    --lumo-shade:                  #000;
+
+    --lumo-primary-text-color:     #7c6aff;
+    --lumo-secondary-text-color:   #8888bb;
+    --lumo-tertiary-text-color:    #55557a;
+    --lumo-disabled-text-color:    #44445a;
+    --lumo-body-text-color:        #e8e8f8;
+    --lumo-header-text-color:      #f0f0ff;
+
+    --lumo-primary-color:          #7c6aff;
+    --lumo-primary-color-10pct:    rgba(124,106,255,0.10);
+    --lumo-primary-color-50pct:    rgba(124,106,255,0.50);
+    --lumo-primary-contrast-color: #fff;
+
+    --lumo-error-color:            #ff5a5a;
+    --lumo-error-color-10pct:      rgba(255,90,90,0.10);
+    --lumo-error-color-50pct:      rgba(255,90,90,0.50);
+    --lumo-error-contrast-color:   #fff;
+
+    --lumo-success-color:          #00d9b5;
+    --lumo-success-color-10pct:    rgba(0,217,181,0.10);
+    --lumo-success-color-50pct:    rgba(0,217,181,0.50);
+    --lumo-success-contrast-color: #050512;
+
+    --lumo-border-radius-s: 6px;
+    --lumo-border-radius-m: 12px;
+    --lumo-border-radius-l: 18px;
+
+    --lumo-font-family:    'DM Sans', sans-serif;
+    --lumo-font-size-s:    12px;
+    --lumo-font-size-m:    14px;
+    --lumo-font-size-l:    16px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 2 — Body background (kills white page)
+───────────────────────────────────────────────────────────── */
+body {
+    background: #07071a !important;
+    color: #e8e8f8 !important;
+    margin: 0;
+}
+
+vaadin-app-layout::part(content) {
+    background: #07071a !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 3 — Main view
+───────────────────────────────────────────────────────────── */
+.createquizmanually-view {
+    font-family: 'DM Sans', sans-serif;
+    background:
+        radial-gradient(ellipse 80% 50% at 10% 0%,   rgba(124,106,255,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 100%, rgba(0,217,181,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 50% 50%,  rgba(236,72,153,0.06) 0%, transparent 70%),
+        linear-gradient(160deg, #04040d 0%, #07071a 50%, #04040d 100%) !important;
+    color: #f0f0ff;
+    min-height: 100vh;
+    padding: 24px;
+    gap: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.createquizmanually-view::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(124,106,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,106,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 4 — TOOLBAR
+───────────────────────────────────────────────────────────── */
+.toolbar {
+    position: relative;
+    z-index: 10;
+    background: rgba(11,11,24,0.92) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.toolbar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 24px; right: 24px; height: 1px;
+    background: linear-gradient(90deg, transparent, #7c6aff, #00d9b5, transparent);
+    opacity: 0.5;
+}
+
+.toolbar vaadin-button {
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.04em;
+    border-radius: 10px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+.toolbar vaadin-button::part(label) { font-weight: 700; letter-spacing: 0.04em; }
+
+.toolbar vaadin-button[theme~="primary"] {
+    background: linear-gradient(135deg, #6a5cff, #8b7aff) !important;
+    box-shadow: 0 4px 20px rgba(124,106,255,0.45) !important;
+    color: #fff !important;
+}
+.toolbar vaadin-button[theme~="primary"]::part(label) { color: #fff; }
+
+.toolbar vaadin-button[theme~="success"] {
+    background: linear-gradient(135deg, #00b89a, #00d9b5) !important;
+    box-shadow: 0 4px 20px rgba(0,217,181,0.4) !important;
+    color: #050512 !important;
+}
+.toolbar vaadin-button[theme~="success"]::part(label) { color: #050512; font-weight: 800; }
+
+.toolbar vaadin-button[theme~="error"] {
+    background: rgba(255,90,90,0.10) !important;
+    border: 1px solid rgba(255,90,90,0.4) !important;
+    color: #ff5a5a !important;
+}
+.toolbar vaadin-button[theme~="error"]::part(label) { color: #ff5a5a; }
+
+.toolbar vaadin-button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 5 — Content layout
+───────────────────────────────────────────────────────────── */
+.content-div {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    position: relative;
+    z-index: 5;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 6 — GRID  ← THE WHITE BOX FIX
+   Must set --lumo-base-color on the element itself AND parts
+───────────────────────────────────────────────────────────── */
+.contact-grid {
+    flex: 2;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+
+    /* Override Lumo on the grid element */
+    --lumo-base-color:      #0b0b18;
+    --lumo-tint-5pct:       rgba(255,255,255,0.03);
+    --lumo-tint-10pct:      rgba(255,255,255,0.05);
+    --lumo-body-text-color: #e8e8f8;
+    background: #0b0b18 !important;
+}
+
+.contact-grid::part(header-cell) {
+    background: #10101f !important;
+    color: #7c6aff !important;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(124,106,255,0.2) !important;
+    padding: 14px 12px;
+}
+
+.contact-grid::part(sorter) { color: #7c6aff !important; }
+
+/* Body cells — this is where the white comes from */
+.contact-grid::part(cell) {
+    background: #0b0b18 !important;
+    color: #e8e8f8 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    padding: 10px 12px;
+}
+
+.contact-grid::part(even-row-cell) {
+    background: rgba(255,255,255,0.012) !important;
+}
+
+.contact-grid::part(selected-row-cell) {
+    background: rgba(124,106,255,0.18) !important;
+    color: #fff !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 7 — QUESTION FORM
+   KEY: overflow-y:auto + max-height = buttons always visible
+───────────────────────────────────────────────────────────── */
+.question-form {
+    flex: 1;
+    min-width: 300px;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    /* Scrollable — buttons can never fall off screen */
+    overflow-y: auto;
+    max-height: calc(100vh - 140px);
+    box-sizing: border-box;
+
+    background: rgba(11,11,24,0.95) !important;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 18px 18px;
+    gap: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(124,106,255,0.12);
+
+    /* Lumo overrides inside form */
+    --lumo-base-color:      #0b0b18;
+    --lumo-body-text-color: #e8e8f8;
+    --lumo-primary-color:   #7c6aff;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124,106,255,0.3) transparent;
+}
+
+.question-form::-webkit-scrollbar { width: 4px; }
+.question-form::-webkit-scrollbar-track { background: transparent; }
+.question-form::-webkit-scrollbar-thumb { background: rgba(124,106,255,0.3); border-radius: 2px; }
+
+/* Top accent stripe */
+.question-form::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, #7c6aff, #00d9b5, transparent);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.question-form.editing {
+    border-color: rgba(124,106,255,0.5) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 40px rgba(124,106,255,0.25) !important;
+}
+
+.question-form vaadin-text-field,
+.question-form vaadin-text-area,
+.question-form vaadin-combo-box { width: 100%; }
+
+.question-form vaadin-text-field::part(label),
+.question-form vaadin-text-area::part(label),
+.question-form vaadin-combo-box::part(label) {
+    font-family: 'Syne', sans-serif;
+    color: #8888bb !important;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.question-form vaadin-text-field::part(input-field),
+.question-form vaadin-text-area::part(input-field),
+.question-form vaadin-combo-box::part(input-field) {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.09) !important;
+    border-radius: 12px;
+    color: #e8e8f8 !important;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.question-form vaadin-text-field:focus-within::part(input-field),
+.question-form vaadin-text-area:focus-within::part(input-field),
+.question-form vaadin-combo-box:focus-within::part(input-field) {
+    border-color: #7c6aff !important;
+    box-shadow: 0 0 0 3px rgba(124,106,255,0.18) !important;
+}
+
+/* BUTTON ROW
+   vaadin-horizontal-layout's internal shadow DOM ignores flex-direction.
+   Fix: target ::part(layout) AND force each button to display:block
+   so they each occupy their own full-width row.
+*/
+.question-form vaadin-horizontal-layout {
+    width: 100% !important;
+    height: auto !important;
+    padding-top: 12px;
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
+}
+
+.question-form vaadin-horizontal-layout::part(layout) {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+}
+
+.question-form vaadin-button {
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    border-radius: 10px;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    height: 42px;
+    overflow: visible;
+    transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.question-form vaadin-button::part(button) {
+    width: 100% !important;
+    justify-content: center;
+}
+
+.question-form vaadin-button[theme~="primary"] {
+    background: linear-gradient(135deg, #00b89a, #00d9b5) !important;
+    color: #050512 !important;
+    box-shadow: 0 4px 18px rgba(0,217,181,0.35) !important;
+}
+.question-form vaadin-button[theme~="primary"]::part(label) { color: #050512; font-weight: 800; }
+
+.question-form vaadin-button[theme~="error"] {
+    background: rgba(255,90,90,0.08) !important;
+    border: 1px solid rgba(255,90,90,0.35) !important;
+    color: #ff5a5a !important;
+}
+.question-form vaadin-button[theme~="error"]::part(label) { color: #ff5a5a; }
+
+.question-form vaadin-button[theme~="tertiary"],
+.question-form vaadin-button:not([theme]) {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: #8888bb !important;
+}
+.question-form vaadin-button[theme~="tertiary"]::part(label),
+.question-form vaadin-button:not([theme])::part(label) { color: #8888bb; }
+
+.question-form vaadin-button:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.question-form vaadin-button:active { transform: scale(0.97); }
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 8 — DIALOG
+───────────────────────────────────────────────────────────── */
+.quiz-creation-title-details::part(overlay) {
+    border-radius: 22px;
+    overflow: hidden;
+    --lumo-base-color: #10101f;
+    background: #10101f !important;
+    border: 1px solid rgba(124,106,255,0.25);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.85);
+}
+.quiz-creation-title-details::part(content) {
+    background: #10101f !important;
+    color: #f0f0ff;
+    padding: 32px;
+}
+.quiz-creation-title-details::part(header) {
+    font-family: 'Syne', sans-serif;
+    color: #f0f0ff !important;
+    font-weight: 800; font-size: 20px;
+    background: transparent !important;
+}
+.quiz-creation-title-details vaadin-text-field,
+.quiz-creation-title-details vaadin-combo-box { width: 100%; }
+.quiz-creation-title-details vaadin-text-field::part(label),
+.quiz-creation-title-details vaadin-combo-box::part(label) {
+    color: #8888bb; font-family: 'Syne', sans-serif;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.quiz-creation-title-details vaadin-text-field::part(input-field),
+.quiz-creation-title-details vaadin-combo-box::part(input-field) {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 12px; color: #f0f0ff !important;
+}
+.quiz-creation-title-details vaadin-button {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    margin-top: 12px; border-radius: 10px; height: 44px;
+}
+.quiz-creation-title-details vaadin-button:nth-of-type(1) {
+    background: linear-gradient(135deg, #6a5cff, #8b7aff) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 24px rgba(124,106,255,0.4) !important;
+}
+.quiz-creation-title-details vaadin-button:nth-of-type(1)::part(label) { color: #fff; }
+.quiz-creation-title-details vaadin-button:nth-of-type(2) {
+    background: rgba(255,90,90,0.08) !important;
+    border: 1px solid rgba(255,90,90,0.3) !important;
+    color: #ff5a5a !important;
+}
+.quiz-creation-title-details vaadin-button:nth-of-type(2)::part(label) { color: #ff5a5a; }
+
+/* ─────────────────────────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────────────────────────── */
+@keyframes slideDown {
+    from { opacity:0; transform:translateY(-16px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+@keyframes panelReveal {
+    from { opacity:0; transform:translateY(18px) scale(0.98); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+}

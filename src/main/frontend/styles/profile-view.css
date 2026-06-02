@@ -1,0 +1,157 @@
+/* 🌌 Background */
+.profile-view {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2), transparent 40%),
+                #020617;
+}
+
+/* 💎 Card */
+.profile-card {
+    width: 380px;
+    padding: 30px;
+    border-radius: 20px;
+
+    backdrop-filter: blur(20px);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* 👤 Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Avatar */
+.profile-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #6366f1;
+}
+
+/* Name */
+.profile-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+/* Email */
+.profile-email {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* 📊 Stats */
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    color: #e2e8f0;
+}
+
+/* 🔘 Buttons */
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Inputs */
+vaadin-text-field::part(input-field),
+vaadin-email-field::part(input-field) {
+    background: #1e293b;
+    border-radius: 10px;
+    color: #e2e8f0;
+}
+/* 🔲 Dialog backdrop */
+vaadin-dialog-overlay::part(backdrop) {
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+/* 💎 Base dialog */
+.custom-dialog::part(content) {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* 📦 Small dialog (password) */
+.dialog-card {
+    width: 350px;
+    padding: 25px;
+    border-radius: 16px;
+
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    color: white;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* 📦 Large dialog (grids) */
+.dialog-card-large {
+    width: 800px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 16px;
+
+     background: radial-gradient(circle at 20% 30%, rgba(99,102,241,0.25), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2), transparent 40%),
+                    linear-gradient(135deg, #020617, #0f172a, #020617);
+    backdrop-filter: blur(20px);
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🧾 Title */
+.dialog-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+/* 🔘 Buttons */
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 📊 Grid styling */
+.styled-grid {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Header */
+.styled-grid::part(header-cell) {
+    background: #1e293b;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* Rows */
+.styled-grid::part(row) {
+    background: #020617;
+    color: #e2e8f0;
+}
+
+/* Hover */
+.styled-grid::part(row):hover {
+    background: #1e293b;
+}
