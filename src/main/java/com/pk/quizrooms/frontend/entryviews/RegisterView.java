@@ -1,6 +1,7 @@
 package com.pk.quizrooms.frontend.entryviews;
 
 import com.pk.quizrooms.backend.enitity.User;
+import com.pk.quizrooms.backend.service.EmailService;
 import com.pk.quizrooms.backend.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -38,6 +39,8 @@ public class RegisterView extends VerticalLayout {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EmailService emailService;
 
     public RegisterView(UserService userService) {
         addClassName("register-view");
@@ -82,6 +85,7 @@ public class RegisterView extends VerticalLayout {
     private void validateAndsaveUserDetails(User user) {
         if(user!=null) {
             userService.savedetails(user);
+            emailService.SuccessfullRegistrationEmail(user);
             getUI().ifPresent(ui -> ui.navigate(LoginView.class));
 
         }
